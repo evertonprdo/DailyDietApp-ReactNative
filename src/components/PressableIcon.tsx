@@ -8,11 +8,11 @@ import { TapAnimationConfig } from "@/constants/animation";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 type Props = PressableProps & {
-  color?: string
+  fill?: string
   icon: (props: SvgProps) => React.JSX.Element
 }
 
-export function PressableIcon({ icon: Icon, color = Colors.white, onPressIn, onPressOut, ...props }: Props) {
+export function PressableIcon({ icon: Icon, fill = Colors.white, onPressIn, onPressOut, ...props }: Props) {
   const isPressedIn = useSharedValue(false)
 
   const animatedStyles = useAnimatedStyle(() => ({
@@ -27,7 +27,7 @@ export function PressableIcon({ icon: Icon, color = Colors.white, onPressIn, onP
     if (onPressIn) onPressIn(event)
   }
 
-  function handleOnPresseOut(event: GestureResponderEvent) {
+  function handleOnPressOut(event: GestureResponderEvent) {
     isPressedIn.value = false
 
     if (onPressOut) onPressOut(event)
@@ -36,19 +36,19 @@ export function PressableIcon({ icon: Icon, color = Colors.white, onPressIn, onP
   return (
     <AnimatedPressable
       onPressIn={handleOnPressIn}
-      onPressOut={handleOnPresseOut}
+      onPressOut={handleOnPressOut}
       style={[styles.container, animatedStyles]}
       {...props}
     >
-      <Icon color={color} height={24} width={24} />
+      <Icon fill={fill} height={24} width={24} />
     </AnimatedPressable>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-    margin: -8,
+    padding: 6,
+    margin: -6,
     borderRadius: 9999
   },
 })

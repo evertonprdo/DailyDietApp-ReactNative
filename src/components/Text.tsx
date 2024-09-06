@@ -6,7 +6,7 @@ export function NunitoTitle({ children, style, ...props }: TextProps) {
 }
 
 export function NunitoText({ children, style, ...props }: TextProps) {
-  return <Text style={[styles.regular, style]} {...props}></Text>
+  return <Text style={[styles.regular, style]} {...props}>{children}</Text>
 }
 
 const styles = StyleSheet.create({
