@@ -35,13 +35,15 @@ export function ExclusionPopup({ onConfirm, onCancel, ...props }: Props) {
                 title="Cancelar"
                 variant="light"
                 onPress={onCancel}
+                style={styles.button}
               />
               <Button
                 title="Sim, excluir"
                 onPress={onConfirm}
+                style={styles.button}
               />
             </View>
-            
+
           </View>
         </View>
       </BlurView>

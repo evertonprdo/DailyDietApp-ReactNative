@@ -2,11 +2,10 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   button: {
-     flexDirection: "row",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
 
-    width: "100%",
     paddingVertical: 16,
     paddingHorizontal: 24,
     gap: 12,
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   title: {
-    fontSize: 14
+    fontSize: 14,
   }
 })
 

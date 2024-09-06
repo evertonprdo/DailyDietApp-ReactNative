@@ -5,12 +5,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "flex-start",
+
     paddingHorizontal: 24,
-    paddingBottom: 24
+    paddingVertical: 24
   },
   text: {
     color: Colors.gray[100],
-    fontSize: 18
+    fontSize: 18,
+    textAlign: "center"
   },
   emptyView: {
     width: 24,

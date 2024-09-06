@@ -14,10 +14,12 @@ import { NunitoText, NunitoTitle } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { MealSectionList } from "@/components/MealSectionList";
 
+import { useMeals } from "@/hooks/useMeals";
 import DATA from "@/temp/data";
 
 export default function Home() {
   const Insets = useSafeAreaInsets()
+  const Meals = useMeals();
 
   return (
     <View style={styles.container}>

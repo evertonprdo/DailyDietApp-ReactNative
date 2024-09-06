@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 12
   },
+  button: {
+    flex: 1
+  },
 
   text: {
     color: Colors.gray[200],

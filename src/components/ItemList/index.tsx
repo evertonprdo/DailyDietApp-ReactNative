@@ -1,7 +1,10 @@
-import { Pressable, PressableProps, View } from "react-native";
+import { GestureResponderEvent, Pressable, PressableProps, View } from "react-native";
 import { NunitoText, NunitoTitle } from "@/components/Text";
 import styles from "./styles";
 import Colors from "@/constants/colors";
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 type Props = PressableProps & {
   time: string
@@ -9,13 +12,37 @@ type Props = PressableProps & {
   isWithinDiet: boolean
 }
 
-export function ItemList({ title, time, isWithinDiet, ...props }: Props) {
+const AnimConfig = {
+  duration: 124,
+  easing: Easing.out(Easing.circle)
+}
+
+export function ItemList({ title, time, isWithinDiet, onPress, ...props }: Props) {
+  const scale = useSharedValue(1)
+
   const tagColor = isWithinDiet
     ? Colors.brand.greenMid
     : Colors.brand.redMid
 
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }]
+  }))
+
+  function handleOnPress(event: GestureResponderEvent) {
+    scale.value = withSequence(
+      withTiming(0.9, AnimConfig),
+      withTiming(1, AnimConfig)
+    )
+
+    if (onPress) setTimeout(() => onPress(event), AnimConfig.duration) 
+  }
+
   return (
-    <Pressable style={styles.container} {...props}>
+    <AnimatedPressable
+      style={[styles.container, animatedStyle]}
+      onPress={handleOnPress}
+      {...props}
+    >
 
       <NunitoTitle style={styles.time}>
         {time}
@@ -28,6 +55,6 @@ export function ItemList({ title, time, isWithinDiet, ...props }: Props) {
       </NunitoText>
 
       <View style={[styles.tag, { backgroundColor: tagColor }]} />
-    </Pressable>
+    </AnimatedPressable>
   )
 }

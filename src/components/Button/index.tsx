@@ -15,7 +15,7 @@ type Props = Omit<PressableProps, "children"> & {
   icon?: (props: SvgProps) => React.JSX.Element
 }
 
-export function Button({ variant = "dark", icon: Icon, title, onPressIn, onPressOut, ...props }: Props) {
+export function Button({ variant = "dark", icon: Icon, title, onPressIn, onPressOut, style, ...props }: Props) {
   const isPressedIn = useSharedValue(false);
 
   const tintColor = variant === "dark"
@@ -50,7 +50,7 @@ export function Button({ variant = "dark", icon: Icon, title, onPressIn, onPress
 
   return (
     <AnimatedPressable
-      style={[styles.button, animatedStyles]}
+      style={[styles.button, animatedStyles, style]}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
       {...props}

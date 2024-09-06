@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 6,
     margin: -6,
-    borderRadius: 9999
+    borderRadius: 999
   },
 })

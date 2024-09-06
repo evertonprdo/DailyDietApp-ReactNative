@@ -1,10 +1,11 @@
 import { router } from "expo-router";
 import { SectionList } from "react-native";
 
+import styles from "./styles";
 import { ItemList } from "@/components/ItemList";
 import { NunitoTitle } from "@/components/Text";
+
 import { SectionListType } from "@/temp/data";
-import styles from "./styles";
 
 type Props = {
   sections: SectionListType
