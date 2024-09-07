@@ -5,10 +5,11 @@ import styles from "./styles";
 import { ItemList } from "@/components/ItemList";
 import { NunitoTitle } from "@/components/Text";
 
-import { SectionListType } from "@/temp/data";
+import { MealSectionListProps } from "@/utils/meals";
+import dayjs from "dayjs";
 
 type Props = {
-  sections: SectionListType
+  sections: MealSectionListProps
   children?: React.ReactNode
 }
 
@@ -21,14 +22,14 @@ export function MealSectionList({ sections, children }: Props) {
       renderItem={({ item }) => (
         <ItemList
           title={item.title}
-          time={item.time}
+          time={dayjs(item.date).format("HH:mm")}
           isWithinDiet={item.isWithinDiet}
           onPress={() => router.navigate(`/meal/${item.id}`)}
         />
       )}
       renderSectionHeader={({ section }) => (
         <NunitoTitle style={styles.sectionTitle}>
-          {section.title}
+          {section.date}
         </NunitoTitle>
       )}
       contentContainerStyle={styles.contentContainer}

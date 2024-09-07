@@ -2,18 +2,36 @@ import { PageTemplate } from "@/components/PageTemplate";
 import { StatisticCard } from "@/components/StatisticCard";
 import { NunitoText, NunitoTitle } from "@/components/Text";
 import Colors from "@/constants/colors";
+import { useDietStatistics } from "@/hooks/useDietStatistics";
 import { router } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
 export default function Statistics() {
+  const Statistcs = useDietStatistics();
+
+  const headeVariant = Statistcs === null
+    ? "gray"
+    : Statistcs.percentWithinDiet >= 0.5
+      ? "green"
+      : "red"
+
+  const percent = Statistcs === null
+    ? "Estatísticas"
+    : (Statistcs.percentWithinDiet * 100).toFixed(2).replace('.', ',') + "%"
+
+  const bestSequence = Statistcs?.bestSequence ?? 0
+  const mealsAmount = Statistcs?.mealsAmount ?? 0
+  const inMeals = Statistcs?.inMeals ?? 0
+  const outMeals = Statistcs?.outMeals ?? 0
+
   return (
     <PageTemplate
-      variant="green"
+      variant={headeVariant}
       onPressGoBack={() => router.back()}
       headerTitle={(
         <>
           <NunitoTitle style={styles.navHeadline}>
-            90,86%{"\n"}
+            {percent}{"\n"}
           </NunitoTitle>
 
           <NunitoText style={styles.navSubHeadline}>
@@ -30,25 +48,25 @@ export default function Statistics() {
 
         <StatisticCard
           variant="gray"
-          headline="22"
+          headline={String(bestSequence)}
           subHeadline="melhor sequencia de pratos dentro da dieta"
         />
         <StatisticCard
           variant="gray"
-          headline="109"
+          headline={String(mealsAmount)}
           subHeadline="refeições registradas"
         />
-        
+
         <View style={styles.rowDataContainer}>
           <StatisticCard
             variant="green"
-            headline="99"
+            headline={String(inMeals)}
             subHeadline="refeições dentro da dieta"
             style={styles.rowCard}
           />
           <StatisticCard
             variant="red"
-            headline="10"
+            headline={String(outMeals)}
             subHeadline="refeições fora da dieta"
             style={styles.rowCard}
           />

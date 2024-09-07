@@ -2,9 +2,10 @@ import { createContext, useEffect, useReducer, useState } from "react";
 
 import { percistStorageMeals, StorageMealsProps } from "@/storage/storageMeals";
 import { mealsReducer, ReducerActionProps } from "@/hooks/mealsReducer";
+import { DietStatisticsProvider } from "@/contexts/StatisticsContext";
 
-export type MealsContextProps = {
-  state: StorageMealsProps["data"]
+export type DietContextProps = {
+  meals: StorageMealsProps["data"]
   dispatch: React.Dispatch<ReducerActionProps>
   lastId: {
     state: number
@@ -12,14 +13,14 @@ export type MealsContextProps = {
   }
 }
 
-export const MealsContext = createContext<MealsContextProps | null>(null)
+export const DietContext = createContext<DietContextProps | null>(null)
 
 type Props = {
   initialData: StorageMealsProps
   children: React.ReactNode
 }
 
-export function MealsContextProvider({ initialData, children }: Props) {
+export function DietContextProvider({ initialData, children }: Props) {
   const [meals, dispatch] = useReducer(mealsReducer, initialData.data)
   const [lastId, setLastId] = useState(initialData.lastId)
 
@@ -31,9 +32,9 @@ export function MealsContextProvider({ initialData, children }: Props) {
   }, [meals])
 
   return (
-    <MealsContext.Provider
+    <DietContext.Provider
       value={{
-        state: meals,
+        meals: meals,
         dispatch,
         lastId: {
           state: lastId,
@@ -41,7 +42,9 @@ export function MealsContextProvider({ initialData, children }: Props) {
         }
       }}
     >
-      {children}
-    </MealsContext.Provider>
+      <DietStatisticsProvider meals={meals}>
+        {children}
+      </DietStatisticsProvider>
+    </DietContext.Provider>
   )
 }

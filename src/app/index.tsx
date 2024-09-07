@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, StyleSheet, TextStyle, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -14,18 +15,43 @@ import { NunitoText, NunitoTitle } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { MealSectionList } from "@/components/MealSectionList";
 
-import { useMeals } from "@/hooks/useMeals";
-import DATA from "@/temp/data";
+import { useMealsReducer } from "@/hooks/useMealsReducer";
+import { getFormatedSectionList, MealSectionListProps } from "@/utils/meals";
+import { useDietStatistics } from "@/hooks/useDietStatistics";
 
 export default function Home() {
   const Insets = useSafeAreaInsets()
-  const Meals = useMeals();
+  const { meals } = useMealsReducer();
+  const Statistics = useDietStatistics();
+
+  const cardColors = Statistics === null
+    ? [Colors.gray[600], Colors.gray[200]]
+    : Statistics.percentWithinDiet >= 0.5
+      ? [Colors.brand.greenLight, Colors.brand.greenDark]
+      : [Colors.brand.redLight, Colors.brand.redDark]
+
+  const cardHeadline = Statistics === null
+    ? "Bem vindo(a)!"
+    : (Statistics.percentWithinDiet * 100).toFixed(2).replace(".", ",") + "%"
+
+  const cardSubHeadline = Statistics === null
+    ? "Que tal começar cadastrando sua\nprimeira refeição"
+    : "das refeições dentro da dieta"
+
+  const [sectionMeals, setSectionMeals] = useState<MealSectionListProps>([]);
+
+  useMemo(() => {
+    if (meals.length > 0) {
+      setSectionMeals(
+        getFormatedSectionList(meals)
+      )
+    }
+  }, [meals])
 
   return (
     <View style={styles.container}>
-      <MealSectionList
-        sections={DATA}
-      >
+      <MealSectionList sections={sectionMeals}>
+
         <View style={[styles.header, { paddingTop: Insets.top + 24 }]}>
           <Logo />
 
@@ -35,19 +61,19 @@ export default function Home() {
           />
         </View>
 
-        <View style={styles.resumeCard}>
+        <View style={[styles.resumeCard, { backgroundColor: cardColors[0] }]}>
           <NunitoTitle style={styles.resumeTitle}>
-            90,86%
+            {cardHeadline}
           </NunitoTitle>
 
           <NunitoText style={styles.resumeSubtitle}>
-            das refeições dentro da dieta
+            {cardSubHeadline}
           </NunitoText>
 
           <View style={styles.resumeAbsoluteIcon}>
             <PressableIcon
               icon={ArrowUpRight}
-              fill={Colors.brand.greenDark}
+              fill={cardColors[1]}
               onPress={() => router.navigate("/statistics")}
             />
           </View>
@@ -86,6 +112,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 24,
+    overflow: "hidden",
   },
 
   header: {
@@ -126,9 +153,9 @@ const styles = StyleSheet.create({
   newMealContainer: {
     gap: 8,
   },
-  newMealLabel: { 
-    color: Colors.gray[100], 
-    fontSize: 16 
+  newMealLabel: {
+    color: Colors.gray[100],
+    fontSize: 16
   },
 
   bottomGradient: {
@@ -137,5 +164,6 @@ const styles = StyleSheet.create({
     right: -24,
     bottom: 0,
     height: "20%",
+    pointerEvents: "none"
   }
 })

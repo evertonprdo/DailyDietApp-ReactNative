@@ -21,7 +21,18 @@ const styles = StyleSheet.create({
   selectOptions: {
     flexDirection: "row",
     gap: 8
+  },
+  calendarIcon: {
+    position: "absolute",
+    right: 14,
+    bottom: 17,
+    pointerEvents: "none"
+  },
+
+  dateInputCotainer: {
+    flex: 1
   }
+
 })
 
 export default styles
