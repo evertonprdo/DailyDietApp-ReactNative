@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     height: 8,
     width: 8,
     borderRadius: 999,
-    backgroundColor: Colors.brand.greenDark
   },
 })
 

@@ -26,6 +26,8 @@ export function DietStatisticsProvider({ meals, children }: StatisticProps) {
       setStatistics(
         geDietStatistics(meals)
       )
+    } else {
+      setStatistics(null)
     }
   }, [meals])
 

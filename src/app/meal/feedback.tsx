@@ -3,8 +3,8 @@ import { Image, StyleSheet, View } from "react-native";
 import GoodFeedback from "@/assets/good-feedback.png"
 import BadFeedback from "@/assets/bad-feedback.png"
 
-import { NunitoText, NunitoTitle } from "@/components/Text";
 import Colors from "@/constants/colors";
+import { NunitoText, NunitoTitle } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { router, useLocalSearchParams } from "expo-router";
 

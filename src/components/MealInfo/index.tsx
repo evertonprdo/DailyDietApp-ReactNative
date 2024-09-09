@@ -38,7 +38,7 @@ export function MealInfo({ title, description, dateTime, isWithinDiet }: Props) 
       </View>
 
       <View style={styles.tagContainer}>
-        <View style={styles.tagIcon} />
+        <View style={[styles.tagIcon, { backgroundColor: tagColor }]} />
 
         <NunitoText style={styles.text}>
           {tagText}

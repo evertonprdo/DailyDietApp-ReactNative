@@ -16,13 +16,15 @@ import { Button } from "@/components/Button";
 import { MealSectionList } from "@/components/MealSectionList";
 
 import { useMealsReducer } from "@/hooks/useMealsReducer";
-import { getFormatedSectionList, MealSectionListProps } from "@/utils/meals";
 import { useDietStatistics } from "@/hooks/useDietStatistics";
+import { getFormatedSectionList, MealSectionListProps } from "@/utils/meals";
 
 export default function Home() {
   const Insets = useSafeAreaInsets()
   const { meals } = useMealsReducer();
   const Statistics = useDietStatistics();
+
+  const [sectionMeals, setSectionMeals] = useState<MealSectionListProps>([]);
 
   const cardColors = Statistics === null
     ? [Colors.gray[600], Colors.gray[200]]
@@ -38,13 +40,13 @@ export default function Home() {
     ? "Que tal começar cadastrando sua\nprimeira refeição"
     : "das refeições dentro da dieta"
 
-  const [sectionMeals, setSectionMeals] = useState<MealSectionListProps>([]);
-
   useMemo(() => {
     if (meals.length > 0) {
       setSectionMeals(
         getFormatedSectionList(meals)
       )
+    } else {
+      setSectionMeals([])
     }
   }, [meals])
 

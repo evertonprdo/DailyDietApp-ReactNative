@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { Alert } from "react-native";
 import { router } from "expo-router";
 
 import { PageTemplate } from "@/components/PageTemplate";
 import { Form } from "@/components/Form";
 import { Button } from "@/components/Button";
+
 import { useMealsReducer } from "@/hooks/useMealsReducer";
-import { Alert } from "react-native";
+import { inputValidations } from "@/utils/validationInputs";
 
 export default function CreateMeal() {
   const { dispatch, lastId } = useMealsReducer();
@@ -19,30 +21,27 @@ export default function CreateMeal() {
   });
 
   function handleOnCreateMeal() {
-    const date = `${meal.date}T${meal.time}:00`
-    const alertTitle = "Formulário"
+    const iptValidationResponse = inputValidations(meal)
 
-    if (meal.isWithinDiet === null) 
-      return Alert.alert(alertTitle, "Defina se a refeição está dentro da dieta")
+    if(iptValidationResponse !== true) {
+      return Alert.alert("Formulário", iptValidationResponse)
+    }
+    
+    const date = meal.date.split("T")[0]
+    const time = meal.time.split("T")[1]
 
-    if (!(meal.time.trim() || meal.date.trim())) 
-      return Alert.alert(alertTitle, "Preencha a data e o horas da refeição")
-
-    if (meal.title.trim().length < 3) 
-      return Alert.alert(alertTitle, "O nome da refeição deve ter pelo menos 3 caracteres")
-
-    if (meal.description.trim().length < 12) 
-      return Alert.alert(alertTitle, "A descrição deve ter pelo menos 12 caracteres")
+    const dateTime = `${date}T${time}`
 
     const nextId = lastId.state + 1
+
     dispatch({
       type: "added",
       params: {
         id: String(nextId),
         title: meal.title,
         description: meal.description,
-        date,
-        isWithinDiet: meal.isWithinDiet
+        date: dateTime,
+        isWithinDiet: meal.isWithinDiet as boolean
       }
     })
 

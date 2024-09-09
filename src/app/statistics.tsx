@@ -1,10 +1,13 @@
+import { router } from "expo-router";
+import { StyleSheet, View } from "react-native";
+
+import Colors from "@/constants/colors";
+
 import { PageTemplate } from "@/components/PageTemplate";
 import { StatisticCard } from "@/components/StatisticCard";
 import { NunitoText, NunitoTitle } from "@/components/Text";
-import Colors from "@/constants/colors";
+
 import { useDietStatistics } from "@/hooks/useDietStatistics";
-import { router } from "expo-router";
-import { StyleSheet, View } from "react-native";
 
 export default function Statistics() {
   const Statistcs = useDietStatistics();

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Keyboard, NativeSyntheticEvent, NativeTouchEvent, Platform, TextInputFocusEventData, View } from "react-native";
+import { Keyboard, NativeSyntheticEvent, NativeTouchEvent, View } from "react-native";
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import dayjs from "dayjs";
-import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 import Colors from "@/constants/colors";
 import CalendarBlank from "@/assets/icons/CalendarBlank";
@@ -12,8 +12,9 @@ import { NunitoTitle } from "@/components/Text";
 import { Select } from "@/components/Select";
 import { Calendar, SelectDateModal } from "@/components/SelectDateModal";
 import { Button } from "@/components/Button";
+import Clock from "@/assets/icons/Clock";
 
-type FormInputProps = {
+export type FormInputProps = {
   title: string;
   description: string
   date: string;
@@ -29,8 +30,7 @@ type Props = {
 export function Form({ state, setState }: Props) {
   const [showModal, setShowModal] = useState(false);
 
-  const [localDate, setLocalDate] = useState("");
-  const [localTime, setLocalTime] = useState("");
+  const [localDate, setLocalDate] = useState(state.date);
 
   function handleOnChangeText(key: keyof FormInputProps, text: string) {
     setState({
@@ -48,6 +48,7 @@ export function Form({ state, setState }: Props) {
 
   function handleOnPressInDate(e: NativeSyntheticEvent<NativeTouchEvent>) {
     e.preventDefault()
+
     setShowModal(true)
   }
 
@@ -55,12 +56,11 @@ export function Form({ state, setState }: Props) {
     e.preventDefault()
 
     DateTimePickerAndroid.open({
-      value: new Date(localTime || Date.now()),
+      value: new Date(state.time || Date.now()),
       mode: 'time',
       onChange: (DateTimePickerEvent, date) => {
-        if(DateTimePickerEvent.type === "set") {
-          handleOnChangeText("time", dayjs(date).format("HH:mm"))
-          setLocalTime(date?.toISOString() ?? "")
+        if (DateTimePickerEvent.type === "set") {
+          handleOnChangeText("time", dayjs(date).toISOString())
         }
       }
     })
@@ -109,12 +109,18 @@ export function Form({ state, setState }: Props) {
         <View style={styles.dateInputCotainer}>
           <Input
             label="Hora"
-            value={state.time}
+            value={state.time ? dayjs(state.time).format("HH:mm") : ""}
             onChangeText={(text) => handleOnChangeText("time", text)}
             keyboardType="numeric"
             maxLength={5}
             onPressIn={handleOnPressInTime}
             onFocus={() => Keyboard.dismiss()}
+          />
+          <Clock
+            width={24}
+            height={24}
+            fill={Colors.gray[200]}
+            style={styles.calendarIcon}
           />
         </View>
       </View>
