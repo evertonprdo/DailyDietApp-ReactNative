@@ -1,15 +1,20 @@
 import { Modal, ModalProps, View } from "react-native";
 import { BlurView } from "expo-blur";
 import Animated, { SlideInDown } from "react-native-reanimated";
-import { Calendar as CalendarRN, CalendarProps } from "react-native-calendars";
+import { Calendar as CalendarRN, CalendarProps, LocaleConfig } from "react-native-calendars";
+
+import X from "@/assets/icons/X";
+import Colors from "@/constants/colors";
 
 import styles from "./styles";
-import { Button } from "../Button";
-import Colors from "@/constants/colors";
 import FontFamily from "@/constants/fonts";
-import { PressableIcon } from "../PressableIcon";
-import X from "@/assets/icons/X";
-import { NunitoText, NunitoTitle } from "../Text";
+import { PressableIcon } from "@/components/PressableIcon";
+import { NunitoText, NunitoTitle } from "@/components/Text";
+
+import { ptBR } from "@/utils/localeCalendarConfig";
+
+LocaleConfig.locales["pt-br"] = ptBR
+LocaleConfig.defaultLocale = "pt-br"
 
 export function Calendar({ ...props }: CalendarProps) {
   return (
