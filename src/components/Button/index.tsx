@@ -32,7 +32,7 @@ export function Button({ variant = "dark", icon: Icon, title, onPressIn, onPress
       : withTiming(bgColors[0]),
 
     borderColor: variant === "dark"
-      ? "trasnparent"
+      ? "transparent"
       : Colors.gray[100]
   }))
 

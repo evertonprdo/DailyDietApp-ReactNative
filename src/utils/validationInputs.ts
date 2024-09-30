@@ -1,17 +1,18 @@
+import i18n from "@/libs/i18n"
 import { FormInputProps } from "@/components/Form"
 
 export function inputValidations(meal: FormInputProps) {
   if (meal.isWithinDiet === null) 
-    return "Selecione se a refeição está dentro da dieta"
+    return i18n.t('Form.alerts.isWithinDiet')
 
   if (!(meal.time.trim() || meal.date.trim())) 
-    return "Preencha a data e horas da refeição"
+    return i18n.t('Form.alerts.fillDateTime')
 
   if (meal.title.trim().length < 3) 
-    return "O nome da refeição deve ter pelo menos 3 caracteres"
+    return i18n.t('Form.alerts.nameLength')
 
   if (meal.description.trim().length < 12) 
-    return "A descrição deve ter pelo menos 12 caracteres"
+    return i18n.t('Form.alerts.descriptionLength')
 
   return true
 }

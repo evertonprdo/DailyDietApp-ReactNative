@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Alert } from "react-native";
 import { router } from "expo-router";
 
@@ -8,8 +8,10 @@ import { Button } from "@/components/Button";
 
 import { useMealsReducer } from "@/hooks/useMealsReducer";
 import { inputValidations } from "@/utils/validationInputs";
+import { useTranslation } from "react-i18next";
 
 export default function CreateMeal() {
+  const { t } = useTranslation()
   const { dispatch, lastId } = useMealsReducer();
 
   const [meal, setMeal] = useState({
@@ -24,7 +26,7 @@ export default function CreateMeal() {
     const iptValidationResponse = inputValidations(meal)
 
     if(iptValidationResponse !== true) {
-      return Alert.alert("Formulário", iptValidationResponse)
+      return Alert.alert(t('Form.alerts.title'), iptValidationResponse)
     }
     
     const date = meal.date.split("T")[0]
@@ -56,7 +58,7 @@ export default function CreateMeal() {
   return (
     <PageTemplate
       variant="gray"
-      headerTitle={<>Nova refeição</>}
+      headerTitle={<Fragment>{t('create.title')}</Fragment>}
       onPressGoBack={() => router.back()}
     >
       <Form
@@ -65,7 +67,7 @@ export default function CreateMeal() {
       />
 
       <Button
-        title="Cadastrar refeição"
+        title={t('create.registerMeal')}
         onPress={handleOnCreateMeal}
       />
     </PageTemplate>

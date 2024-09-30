@@ -3,6 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image, StyleSheet, TextStyle, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next"
 
 import Logo from "@/assets/Logo";
 import ProfilePhoto from "@/assets/profile-photo.jpeg"
@@ -17,10 +18,12 @@ import { MealSectionList } from "@/components/MealSectionList";
 
 import { useMealsReducer } from "@/hooks/useMealsReducer";
 import { useDietStatistics } from "@/hooks/useDietStatistics";
-import { getFormatedSectionList, MealSectionListProps } from "@/utils/meals";
+import { getFormattedSectionList, MealSectionListProps } from "@/utils/meals";
 
 export default function Home() {
+  const { t } = useTranslation()
   const Insets = useSafeAreaInsets()
+
   const { meals } = useMealsReducer();
   const Statistics = useDietStatistics();
 
@@ -33,17 +36,17 @@ export default function Home() {
       : [Colors.brand.redLight, Colors.brand.redDark]
 
   const cardHeadline = Statistics === null
-    ? "Bem vindo(a)!"
+    ? t('home.card.welcome')
     : (Statistics.percentWithinDiet * 100).toFixed(2).replace(".", ",") + "%"
 
   const cardSubHeadline = Statistics === null
-    ? "Que tal começar cadastrando sua\nprimeira refeição"
-    : "das refeições dentro da dieta"
+    ? t('home.card.emptyMessage')
+    : t('home.card.message')
 
   useMemo(() => {
     if (meals.length > 0) {
       setSectionMeals(
-        getFormatedSectionList(meals)
+        getFormattedSectionList(meals)
       )
     } else {
       setSectionMeals([])
@@ -84,11 +87,11 @@ export default function Home() {
 
         <View style={styles.newMealContainer}>
           <NunitoText style={styles.newMealLabel}>
-            Refeições
+            {t('home.labelMeals')}
           </NunitoText>
 
           <Button
-            title="Nova refeição"
+            title={t('home.btnNewMeal')}
             icon={Plus}
             onPress={() => router.navigate("/meal/create")}
           />

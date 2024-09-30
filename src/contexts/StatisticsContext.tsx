@@ -19,7 +19,7 @@ type StatisticProps = {
 }
 
 export function DietStatisticsProvider({ meals, children }: StatisticProps) {
-  const [statistcs, setStatistics] = useState<DietStatisticsProps | null>(null)
+  const [statistics, setStatistics] = useState<DietStatisticsProps | null>(null)
 
   useEffect(() => {
     if (meals.length > 0) {
@@ -32,7 +32,7 @@ export function DietStatisticsProvider({ meals, children }: StatisticProps) {
   }, [meals])
 
   return (
-    <DietStatisticsContext.Provider value={statistcs}>
+    <DietStatisticsContext.Provider value={statistics}>
       {children}
     </DietStatisticsContext.Provider>
   )

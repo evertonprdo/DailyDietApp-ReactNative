@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import { Alert, Modal, StyleSheet, View } from "react-native";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import dayjs from "dayjs";
@@ -15,6 +15,7 @@ import { Loading } from "@/components/Loading";
 
 import { useMealsReducer } from "@/hooks/useMealsReducer";
 import { inputValidations } from "@/utils/validationInputs";
+import { useTranslation } from "react-i18next";
 
 const initialState = {
   title: "",
@@ -25,6 +26,8 @@ const initialState = {
 }
 
 export default function Meal() {
+  const { t } = useTranslation()
+
   const localParams = useLocalSearchParams();
   const { meals, dispatch } = useMealsReducer();
 
@@ -39,7 +42,7 @@ export default function Meal() {
     const iptValidationResponse = inputValidations(meal)
 
     if (iptValidationResponse !== true) {
-      return Alert.alert("Formulário", iptValidationResponse)
+      return Alert.alert(t('Form.alerts.title'), iptValidationResponse)
     }
 
     const time = meal.time.split("T")[1]
@@ -101,10 +104,10 @@ export default function Meal() {
   if (isLoading) return <Loading />
 
   return (
-    <>
+    <Fragment>
       <PageTemplate
         variant={meal.isWithinDiet ? "green" : "red"}
-        headerTitle={<>Refeição</>}
+        headerTitle={<Fragment>Refeição</Fragment>}
         onPressGoBack={() => router.back()}
       >
         <MealInfo
@@ -142,7 +145,7 @@ export default function Meal() {
       >
         <PageTemplate
           variant="gray"
-          headerTitle={<>Editar refeição</>}
+          headerTitle={<Fragment>Editar refeição</Fragment>}
           onPressGoBack={() => setIsEditing(false)}
         >
           <Form
@@ -156,7 +159,7 @@ export default function Meal() {
           />
         </PageTemplate>
       </Modal>
-    </>
+    </Fragment>
   )
 }
 

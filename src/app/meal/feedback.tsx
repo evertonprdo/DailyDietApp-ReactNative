@@ -1,21 +1,29 @@
 import { Image, StyleSheet, View } from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { Trans, useTranslation } from "react-i18next";
 
 import GoodFeedback from "@/assets/good-feedback.png"
 import BadFeedback from "@/assets/bad-feedback.png"
 
 import Colors from "@/constants/colors";
-import { NunitoText, NunitoTitle } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { router, useLocalSearchParams } from "expo-router";
+import { NunitoText, NunitoTitle } from "@/components/Text";
 
 export default function Feedback() {
+  const { t } = useTranslation()
+
   const localParams = useLocalSearchParams();
   const isWithinDiet = localParams.isWithinDiet === "yes"
 
   const color = isWithinDiet ? Colors.brand.greenDark : Colors.brand.redDark
-  const Message = isWithinDiet
-    ? ["Continue assim!", "Você continua ", "dentro da dieta", ". Muito bem!"]
-    : ["Que pena!", "Você ", "saiu da dieta", " dessa vez, mas continue\nse esforçando e não desista!"]
+
+  const titleKey = isWithinDiet 
+    ? 'feedback.good.title'
+    : 'feedback.bad.title'
+
+  const subTitleKey = isWithinDiet 
+    ? 'feedback.good.subtitle'
+    : 'feedback.bad.subtitle'
 
   const image = isWithinDiet ? GoodFeedback : BadFeedback
 
@@ -24,17 +32,13 @@ export default function Feedback() {
       <View style={styles.messageContainer}>
 
         <NunitoTitle style={[styles.headline, { color }]}>
-          {Message[0]}
+          {t(titleKey)}
         </NunitoTitle>
 
         <NunitoText style={styles.subHeadline}>
-          {Message[1]}
-
-          <NunitoTitle>
-            {Message[2]}
-          </NunitoTitle>
-
-          {Message[3]}
+          <Trans i18nKey={subTitleKey}>
+            <NunitoTitle/>
+          </Trans>
         </NunitoText>
       </View>
 
@@ -44,7 +48,7 @@ export default function Feedback() {
       />
 
       <Button
-        title="Ir para a página inicial"
+        title={t('feedback.button')}
         onPress={() => router.dismissAll()}
       />
     </View>
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 32
   },
 
   messageContainer: {

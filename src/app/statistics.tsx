@@ -1,5 +1,7 @@
-import { router } from "expo-router";
+import { Fragment } from "react";
 import { StyleSheet, View } from "react-native";
+import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import Colors from "@/constants/colors";
 
@@ -10,67 +12,69 @@ import { NunitoText, NunitoTitle } from "@/components/Text";
 import { useDietStatistics } from "@/hooks/useDietStatistics";
 
 export default function Statistics() {
-  const Statistcs = useDietStatistics();
+  const { t } = useTranslation()
 
-  const headeVariant = Statistcs === null
+  const Statistics = useDietStatistics();
+
+  const headerVariant = Statistics === null
     ? "gray"
-    : Statistcs.percentWithinDiet >= 0.5
+    : Statistics.percentWithinDiet >= 0.5
       ? "green"
       : "red"
 
-  const percent = Statistcs === null
-    ? "Estatísticas"
-    : (Statistcs.percentWithinDiet * 100).toFixed(2).replace('.', ',') + "%"
+  const header = Statistics === null
+    ? t('statistics.title')
+    : (Statistics.percentWithinDiet * 100).toFixed(2).replace('.', ',') + "%"
 
-  const bestSequence = Statistcs?.bestSequence ?? 0
-  const mealsAmount = Statistcs?.mealsAmount ?? 0
-  const inMeals = Statistcs?.inMeals ?? 0
-  const outMeals = Statistcs?.outMeals ?? 0
+  const bestSequence = Statistics?.bestSequence ?? 0
+  const mealsAmount = Statistics?.mealsAmount ?? 0
+  const inMeals = Statistics?.inMeals ?? 0
+  const outMeals = Statistics?.outMeals ?? 0
 
   return (
     <PageTemplate
-      variant={headeVariant}
+      variant={headerVariant}
       onPressGoBack={() => router.back()}
       headerTitle={(
-        <>
+        <Fragment>
           <NunitoTitle style={styles.navHeadline}>
-            {percent}{"\n"}
+            {header}{"\n"}
           </NunitoTitle>
 
           <NunitoText style={styles.navSubHeadline}>
-            das refeições dentro da dieta
+            {t('statistics.subtitle')}
           </NunitoText>
-        </>
+        </Fragment>
       )}
     >
       <View style={styles.dataContainer}>
 
         <NunitoTitle style={styles.title}>
-          Estatísticas gerais
+          {t('statistics.sectionTitle')}
         </NunitoTitle>
 
         <StatisticCard
           variant="gray"
           headline={String(bestSequence)}
-          subHeadline="melhor sequencia de pratos dentro da dieta"
+          subHeadline={t('statistics.cards.bestStreak')}
         />
         <StatisticCard
           variant="gray"
           headline={String(mealsAmount)}
-          subHeadline="refeições registradas"
+          subHeadline={t('statistics.cards.registers')}
         />
 
         <View style={styles.rowDataContainer}>
           <StatisticCard
             variant="green"
             headline={String(inMeals)}
-            subHeadline="refeições dentro da dieta"
+            subHeadline={t('statistics.cards.withinCount')}
             style={styles.rowCard}
           />
           <StatisticCard
             variant="red"
             headline={String(outMeals)}
-            subHeadline="refeições fora da dieta"
+            subHeadline={t('statistics.cards.outsideCount')}
             style={styles.rowCard}
           />
         </View>

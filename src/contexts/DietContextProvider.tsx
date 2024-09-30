@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 
-import { percistStorageMeals, StorageMealsProps } from "@/storage/storageMeals";
+import { persistStorageMeals, StorageMealsProps } from "@/libs/storage/storageMeals";
 import { mealsReducer, ReducerActionProps } from "@/hooks/mealsReducer";
 import { DietStatisticsProvider } from "@/contexts/StatisticsContext";
 
@@ -25,7 +25,7 @@ export function DietContextProvider({ initialData, children }: Props) {
   const [lastId, setLastId] = useState(initialData.lastId)
 
   useEffect(() => {
-    percistStorageMeals({
+    persistStorageMeals({
       data: meals,
       lastId
     })

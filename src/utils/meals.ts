@@ -1,4 +1,4 @@
-import { StorageMealsProps } from "@/storage/storageMeals";
+import { StorageMealsProps } from "@/libs/storage/storageMeals";
 import dayjs from "dayjs";
 
 type MealProps = StorageMealsProps["data"][0]
@@ -13,7 +13,7 @@ export type MealSectionListProps = {
   }[]
 }[]
 
-export function getFormatedSectionList(meals: MealProps[]) {
+export function getFormattedSectionList(meals: MealProps[]) {
   const sectionList = mealsToSectionList(meals);
 
   return sectionList.map(section => {

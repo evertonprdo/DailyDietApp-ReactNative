@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     pointerEvents: "none"
   },
 
-  dateInputCotainer: {
+  dateInputContainer: {
     flex: 1
   }
 

@@ -1,0 +1,58 @@
+{
+  "home": {
+    "card": {
+      "welcome": "Bem vindo(a)!",
+      "message": "das refeições dentro da dieta",
+      "emptyMessage": "Que tal começar cadastrando sua primeira refeição?"
+    },
+    "labelMeals": "Refeição",
+    "btnNewMeal": "Nova refeição"
+  },
+  "statistics": {
+    "title": "Estatísticas",
+    "subtitle": "das refeições dentro da dieta",
+    "sectionTitle": "Estatísticas gerais",
+    "cards": {
+      "bestStreak": "melhor sequência de pratos dentro da dieta",
+      "registers": "refeições registradas",
+      "withinCount": "refeições dentro da dieta",
+      "outsideCount": "refeições fora da dieta"
+    }
+  },
+  "create": {
+    "title": "Nova refeição",
+    "registerMeal": "Cadastrar refeição"
+  },
+  "feedback": {
+    "good": {
+      "title": "Continue assim!",
+      "subtitle": "Você continua <1>dentro da dieta</1>. Muito bem!"
+    },
+    "bad": {
+      "title": "Que pena!",
+      "subtitle": "Você <1>saiu da dieta</1> dessa vez, mas continue se esforçando e não desista!"
+    },
+    "button": "Ir para a página inicial"
+  },
+  "Form": {
+    "name": "Nome",
+    "description": "Descrição",
+    "date": "Data",
+    "time": "Hora",
+    "isWithinDiet": "Esta dento da dieta?",
+    "yes": "Sim",
+    "no": "Não",
+    "modal": {
+      "headline": "Selecionar data",
+      "subHeadline": "Selecione o dia desta refeição",
+      "button": "Confirmar"
+    },
+    "alerts": {
+      "title": "Formulário",
+      "isWithinDiet": "Selecione se a refeição está dentro da dieta",
+      "fillDateTime": "Preencha a data e horas da refeição",
+      "nameLength": "O nome da refeição deve ter pelo menos 3 caracteres",
+      "descriptionLength": "A descrição deve ter pelo menos 12 caracteres"
+    }
+  }
+}

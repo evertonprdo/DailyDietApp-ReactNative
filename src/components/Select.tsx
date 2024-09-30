@@ -4,6 +4,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-na
 
 import Colors from "@/constants/colors";
 import { NunitoTitle } from "./Text";
+import { useTranslation } from "react-i18next";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
@@ -13,6 +14,7 @@ type Props = PressableProps & {
 }
 
 export function Select({ variant, isSelected, children, ...props }: Props) {
+  const { t } = useTranslation()
   const isSelectedSv = useSharedValue(false);
 
   const bgTintColor = variant === "YES"
@@ -45,7 +47,10 @@ export function Select({ variant, isSelected, children, ...props }: Props) {
       <View style={[styles.tag, { backgroundColor: tintColor }]} />
 
       <NunitoTitle style={styles.text}>
-        {variant === "YES" ? "Sim" : "Não"}
+        {variant === "YES"
+          ? t('Form.yes')
+          : t('Form.no')
+        }
       </NunitoTitle>
     </AnimatedPressable>
   )

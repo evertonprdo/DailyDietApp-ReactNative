@@ -1,0 +1,58 @@
+{
+  "home": {
+    "card": {
+      "welcome": "Welcome!",
+      "message": "of the meals within the diet",
+      "emptyMessage": "How about starting by registering your first meal?"
+    },
+    "labelMeals": "Meals",
+    "btnNewMeal": "New meal"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "subtitle": "of meals within the diet",
+    "sectionTitle": "General statistics",
+    "cards": {
+      "bestStreak": "best streak of meals within the diet",
+      "registers": "registered meals",
+      "withinCount": "meals within the diet",
+      "outsideCount": "meals outside the diet"
+    }
+  },
+  "create": {
+    "title": "New meal",
+    "registerMeal": "Register meal"
+  },
+  "feedback": {
+    "good": {
+      "title": "Keep it up!",
+      "subtitle": "You are still <0>within the diet</0>. Well done!"
+    },
+    "bad": {
+      "title": "What a pity!",
+      "subtitle": "You <0>fell off the diet</0> this time, but keep pushing and don't give up!"
+    },
+    "button": "Go to the homepage"
+  },
+  "Form": {
+    "name": "Name",
+    "description": "Description",
+    "date": "Date",
+    "time": "Time",
+    "isWithinDiet": "Is it within the diet?",
+    "yes": "Yes",
+    "no": "No",
+    "modal": {
+      "headline": "Select date",
+      "subHeadline": "Select the day of this meal",
+      "button": "Confirm"
+    },
+    "alerts": {
+      "title": "Form",
+      "isWithinDiet": "Select whether the meal is within the diet",
+      "fillDateTime": "Fill in the date and time of the meal",
+      "nameLength": "The meal name must have at least 3 characters",
+      "descriptionLength": "The description must have at least 12 characters"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { StorageMealsProps } from "@/storage/storageMeals"
+import { StorageMealsProps } from "@/libs/storage/storageMeals"
 import { orderMealsByDate } from "@/utils/meals"
 
 export type MealProps = StorageMealsProps["data"][0]

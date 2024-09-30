@@ -1,4 +1,5 @@
 import "@/utils/dayjsLocaleConfig"
+import "@/libs/i18n"
 
 import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
@@ -8,7 +9,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Colors from "@/constants/colors";
 import { Loading } from "@/components/Loading";
 
-import { getStorageMeals, StorageMealsProps } from "@/storage/storageMeals";
+import { getStorageMeals, StorageMealsProps } from "@/libs/storage/storageMeals";
 import { DietContextProvider } from "@/contexts/DietContextProvider";
 
 export default function RootLayout() {

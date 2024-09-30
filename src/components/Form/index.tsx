@@ -13,6 +13,7 @@ import { Select } from "@/components/Select";
 import { Calendar, SelectDateModal } from "@/components/SelectDateModal";
 import { Button } from "@/components/Button";
 import Clock from "@/assets/icons/Clock";
+import { useTranslation } from "react-i18next";
 
 export type FormInputProps = {
   title: string;
@@ -28,6 +29,7 @@ type Props = {
 }
 
 export function Form({ state, setState }: Props) {
+  const { t } = useTranslation()
   const [showModal, setShowModal] = useState(false);
 
   const [localDate, setLocalDate] = useState(state.date);
@@ -74,14 +76,14 @@ export function Form({ state, setState }: Props) {
   return (
     <View style={styles.container}>
       <Input
-        label="Nome"
+        label={t('Form.name')}
         value={state.title}
         onChangeText={(text) => handleOnChangeText("title", text)}
         maxLength={24}
       />
 
       <Input
-        label="Descrição"
+        label={t('Form.description')}
         value={state.description}
         onChangeText={(text) => handleOnChangeText("description", text)}
         numberOfLines={5}
@@ -91,9 +93,9 @@ export function Form({ state, setState }: Props) {
       />
 
       <View style={styles.dateTimeContainer}>
-        <View style={styles.dateInputCotainer}>
+        <View style={styles.dateInputContainer}>
           <Input
-            label="Data"
+            label={t('Form.date')}
             value={state.date ? dayjs(state.date).format("DD/MM/YYYY") : ""}
             onPressIn={handleOnPressInDate}
             onFocus={() => Keyboard.dismiss()}
@@ -106,9 +108,9 @@ export function Form({ state, setState }: Props) {
           />
         </View>
 
-        <View style={styles.dateInputCotainer}>
+        <View style={styles.dateInputContainer}>
           <Input
-            label="Hora"
+            label={t('Form.description')}
             value={state.time ? dayjs(state.time).format("HH:mm") : ""}
             onChangeText={(text) => handleOnChangeText("time", text)}
             keyboardType="numeric"
@@ -127,7 +129,7 @@ export function Form({ state, setState }: Props) {
 
       <View style={styles.selectContainer}>
         <NunitoTitle style={styles.selectLabel}>
-          Está dentro da dieta?
+          {t('Form.isWithinDiet')}
         </NunitoTitle>
 
         <View style={styles.selectOptions}>
@@ -148,8 +150,8 @@ export function Form({ state, setState }: Props) {
       <SelectDateModal
         visible={showModal}
         onClose={() => setShowModal(false)}
-        headline="Selecionar data"
-        subHeadline="Selecione o dia desta refeição"
+        headline={t('Form.modal.headline')}
+        subHeadline={t('Form.modal.subHeadline')}
       >
         <Calendar
           maxDate={dayjs(new Date).add(-1, 'day').toISOString()}
@@ -157,7 +159,7 @@ export function Form({ state, setState }: Props) {
           markedDates={{ [localDate]: { selected: true } }}
         />
 
-        <Button title="Confirmar" onPress={handleSelectDateConfirm} />
+        <Button title={t('Form.modal.button')} onPress={handleSelectDateConfirm} />
       </SelectDateModal>
     </View>
   )
