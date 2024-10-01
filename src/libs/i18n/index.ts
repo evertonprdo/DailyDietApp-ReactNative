@@ -1,8 +1,8 @@
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 
-import enUS from "./locales/en/translation.json"
-import ptBR from "./locales/pt/translation.json"
+import enUS from "./locales/en"
+import ptBR from "./locales/pt"
 
 import { getStorageLanguage } from "@/libs/storage/storageLanguage"
 

@@ -7,7 +7,7 @@ import { Form } from "@/components/Form";
 import { Button } from "@/components/Button";
 
 import { useMealsReducer } from "@/hooks/useMealsReducer";
-import { inputValidations } from "@/utils/validationInputs";
+import { validateInputs } from "@/utils/validationInputs";
 import { useTranslation } from "react-i18next";
 
 export default function CreateMeal() {
@@ -23,12 +23,12 @@ export default function CreateMeal() {
   });
 
   function handleOnCreateMeal() {
-    const iptValidationResponse = inputValidations(meal)
-
-    if(iptValidationResponse !== true) {
-      return Alert.alert(t('Form.alerts.title'), iptValidationResponse)
+    try {
+      validateInputs(meal)
+    } catch (error: any) {
+      Alert.alert(t('form.alerts.title'), error.message)
     }
-    
+
     const date = meal.date.split("T")[0]
     const time = meal.time.split("T")[1]
 

@@ -1,8 +1,10 @@
 import { View } from "react-native";
+import { useTranslation } from "react-i18next";
+
+import Colors from "@/constants/colors";
 
 import styles from "./styles";
 import { NunitoText, NunitoTitle } from "@/components/Text";
-import Colors from "@/constants/colors";
 
 type Props = {
   title: string
@@ -12,8 +14,10 @@ type Props = {
 }
 
 export function MealInfo({ title, description, dateTime, isWithinDiet }: Props) {
+  const { t } = useTranslation()
+
   const tagColor = isWithinDiet ? Colors.brand.greenDark : Colors.brand.redDark
-  const tagText = isWithinDiet ? "dentro da dieta" : "fora da dieta"
+  const tagText = isWithinDiet ? t('meal.tag.good') : t('meal.tag.bad')
 
   return (
     <View style={styles.container}>
@@ -29,7 +33,7 @@ export function MealInfo({ title, description, dateTime, isWithinDiet }: Props) 
 
       <View style={styles.section}>
         <NunitoTitle style={styles.subTitle}>
-          Data e hora
+          {t('meal.dateTime')}
         </NunitoTitle>
 
         <NunitoText style={styles.text}>

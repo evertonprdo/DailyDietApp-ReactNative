@@ -1,0 +1,27 @@
+{
+  "title": "Meal",
+  "dateTime": "Date and Time",
+  "dateTimeValues": "{{date}} at {{time}}",
+  "tag": {
+    "good": "within the diet",
+    "bad": "outside the diet"
+  },
+  "btn": {
+    "edit": "Edit meal",
+    "delete": "Delete meal"
+  },
+  "modal": {
+    "message": "Do you really want to delete the meal record?",
+    "cancel": "Cancel",
+    "confirm": "Yes, delete"
+  },
+  "edit": {
+    "title": "Edit meal",
+    "button": "Save changes"
+  },
+  "alert": {
+    "title": "Meal",
+    "message": "It seems that the meal {{params}} was not found or does not exist.",
+    "button": "Go back to the homepage"
+  }
+}

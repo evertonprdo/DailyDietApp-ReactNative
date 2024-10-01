@@ -1,0 +1,11 @@
+{
+  "good": {
+    "title": "Continue assim!",
+    "subtitle": "Você continua <1>dentro da dieta</1>. Muito bem!"
+  },
+  "bad": {
+    "title": "Que pena!",
+    "subtitle": "Você <1>saiu da dieta</1> dessa vez, mas continue se esforçando e não desista!"
+  },
+  "button": "Ir para a página inicial"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Statistics",
+  "subtitle": "of meals within the diet",
+  "sectionTitle": "General statistics",
+  "cards": {
+    "bestStreak": "best streak of meals within the diet",
+    "registers": "registered meals",
+    "withinCount": "meals within the diet",
+    "outsideCount": "meals outside the diet"
+  }
+}

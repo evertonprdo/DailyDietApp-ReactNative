@@ -1,0 +1,13 @@
+{
+  "card": {
+    "welcome": "Welcome!",
+    "message": "of the meals within the diet",
+    "emptyMessage": "How about starting by registering your first meal?"
+  },
+  "labelMeals": "Meals",
+  "btnNewMeal": "New meal",
+  "modal": {
+    "title": "Profile",
+    "languages": "Languages"
+  }
+}

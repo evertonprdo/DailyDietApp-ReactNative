@@ -1,19 +1,20 @@
 import { useMemo, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Image, StyleSheet, TextStyle, View } from "react-native";
+import { Image, Pressable, StyleSheet, TextStyle, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next"
 
 import Logo from "@/assets/Logo";
-import ProfilePhoto from "@/assets/profile-photo.jpeg"
 import Plus from "@/assets/icons/Plus";
+import ProfilePhoto from "@/assets/profile-photo.jpeg"
 import ArrowUpRight from "@/assets/icons/ArrowUpRight";
 
 import Colors from "@/constants/colors";
+import { Button } from "@/components/Button";
+import { Profile } from "@/components/Profile";
 import { PressableIcon } from "@/components/PressableIcon";
 import { NunitoText, NunitoTitle } from "@/components/Text";
-import { Button } from "@/components/Button";
 import { MealSectionList } from "@/components/MealSectionList";
 
 import { useMealsReducer } from "@/hooks/useMealsReducer";
@@ -28,6 +29,7 @@ export default function Home() {
   const Statistics = useDietStatistics();
 
   const [sectionMeals, setSectionMeals] = useState<MealSectionListProps>([]);
+  const [showModal, setShowModal] = useState(false)
 
   const cardColors = Statistics === null
     ? [Colors.gray[600], Colors.gray[200]]
@@ -60,10 +62,12 @@ export default function Home() {
         <View style={[styles.header, { paddingTop: Insets.top + 24 }]}>
           <Logo />
 
-          <Image
-            source={ProfilePhoto}
-            style={styles.imageProfile}
-          />
+          <Pressable onPress={() => setShowModal(true)}>
+            <Image
+              source={ProfilePhoto}
+              style={styles.imageProfile}
+            />
+          </Pressable>
         </View>
 
         <View style={[styles.resumeCard, { backgroundColor: cardColors[0] }]}>
@@ -104,7 +108,12 @@ export default function Home() {
         locations={[0, 0.9]}
         style={styles.bottomGradient}
       />
-    </View>
+
+      <Profile
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+      />
+    </View >
   )
 }
 

@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { Keyboard, NativeSyntheticEvent, NativeTouchEvent, View } from "react-native";
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 
 import Colors from "@/constants/colors";
+import Clock from "@/assets/icons/Clock";
 import CalendarBlank from "@/assets/icons/CalendarBlank";
 
 import styles from "./styles";
 import { Input } from "@/components/Input";
-import { NunitoTitle } from "@/components/Text";
 import { Select } from "@/components/Select";
-import { Calendar, SelectDateModal } from "@/components/SelectDateModal";
 import { Button } from "@/components/Button";
-import Clock from "@/assets/icons/Clock";
-import { useTranslation } from "react-i18next";
+import { NunitoTitle } from "@/components/Text";
+import { Calendar, SelectDateModal } from "@/components/SelectDateModal";
+
+import { useLanguage } from "@/hooks/useLanguage";
 
 export type FormInputProps = {
   title: string;
@@ -30,8 +32,9 @@ type Props = {
 
 export function Form({ state, setState }: Props) {
   const { t } = useTranslation()
-  const [showModal, setShowModal] = useState(false);
+  const { language } = useLanguage()
 
+  const [showModal, setShowModal] = useState(false);
   const [localDate, setLocalDate] = useState(state.date);
 
   function handleOnChangeText(key: keyof FormInputProps, text: string) {
@@ -76,14 +79,14 @@ export function Form({ state, setState }: Props) {
   return (
     <View style={styles.container}>
       <Input
-        label={t('Form.name')}
+        label={t('form.name')}
         value={state.title}
         onChangeText={(text) => handleOnChangeText("title", text)}
         maxLength={24}
       />
 
       <Input
-        label={t('Form.description')}
+        label={t('form.description')}
         value={state.description}
         onChangeText={(text) => handleOnChangeText("description", text)}
         numberOfLines={5}
@@ -95,8 +98,8 @@ export function Form({ state, setState }: Props) {
       <View style={styles.dateTimeContainer}>
         <View style={styles.dateInputContainer}>
           <Input
-            label={t('Form.date')}
-            value={state.date ? dayjs(state.date).format("DD/MM/YYYY") : ""}
+            label={t('form.date')}
+            value={state.date ? dayjs(state.date).format(language.date) : ""}
             onPressIn={handleOnPressInDate}
             onFocus={() => Keyboard.dismiss()}
           />
@@ -110,11 +113,9 @@ export function Form({ state, setState }: Props) {
 
         <View style={styles.dateInputContainer}>
           <Input
-            label={t('Form.description')}
-            value={state.time ? dayjs(state.time).format("HH:mm") : ""}
+            label={t('form.time')}
+            value={state.time ? dayjs(state.time).format(language.time) : ""}
             onChangeText={(text) => handleOnChangeText("time", text)}
-            keyboardType="numeric"
-            maxLength={5}
             onPressIn={handleOnPressInTime}
             onFocus={() => Keyboard.dismiss()}
           />
@@ -129,7 +130,7 @@ export function Form({ state, setState }: Props) {
 
       <View style={styles.selectContainer}>
         <NunitoTitle style={styles.selectLabel}>
-          {t('Form.isWithinDiet')}
+          {t('form.isWithinDiet')}
         </NunitoTitle>
 
         <View style={styles.selectOptions}>
@@ -150,8 +151,8 @@ export function Form({ state, setState }: Props) {
       <SelectDateModal
         visible={showModal}
         onClose={() => setShowModal(false)}
-        headline={t('Form.modal.headline')}
-        subHeadline={t('Form.modal.subHeadline')}
+        headline={t('form.modal.headline')}
+        subHeadline={t('form.modal.subHeadline')}
       >
         <Calendar
           maxDate={dayjs(new Date).add(-1, 'day').toISOString()}
@@ -159,7 +160,7 @@ export function Form({ state, setState }: Props) {
           markedDates={{ [localDate]: { selected: true } }}
         />
 
-        <Button title={t('Form.modal.button')} onPress={handleSelectDateConfirm} />
+        <Button title={t('form.modal.button')} onPress={handleSelectDateConfirm} />
       </SelectDateModal>
     </View>
   )

@@ -1,0 +1,11 @@
+{
+  "title": "Estatísticas",
+  "subtitle": "das refeições dentro da dieta",
+  "sectionTitle": "Estatísticas gerais",
+  "cards": {
+    "bestStreak": "melhor sequência de pratos dentro da dieta",
+    "registers": "refeições registradas",
+    "withinCount": "refeições dentro da dieta",
+    "outsideCount": "refeições fora da dieta"
+  }
+}

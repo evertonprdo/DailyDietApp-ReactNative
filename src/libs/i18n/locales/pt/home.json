@@ -1,0 +1,13 @@
+{
+  "card": {
+    "welcome": "Bem vindo(a)!",
+    "message": "das refeições dentro da dieta",
+    "emptyMessage": "Que tal começar cadastrando sua primeira refeição?"
+  },
+  "labelMeals": "Refeição",
+  "btnNewMeal": "Nova refeição",
+  "modal": {
+    "title": "Perfil",
+    "languages": "Idiomas"
+  }
+}

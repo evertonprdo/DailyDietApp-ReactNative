@@ -1,4 +1,3 @@
-import "@/utils/dayjsLocaleConfig"
 import "@/libs/i18n"
 
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import { Loading } from "@/components/Loading";
 
 import { getStorageMeals, StorageMealsProps } from "@/libs/storage/storageMeals";
 import { DietContextProvider } from "@/contexts/DietContextProvider";
+import { LanguageContextProvider } from "@/contexts/LanguageContext";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold })
@@ -34,15 +34,17 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <DietContextProvider initialData={initialMeals}>
-        <Stack
-          screenOptions={{
-            contentStyle: { backgroundColor: Colors.gray[700] },
-            headerShown: false,
-            statusBarTranslucent: true,
-            statusBarColor: "transparent",
-            statusBarStyle: "dark"
-          }}
-        />
+        <LanguageContextProvider>
+          <Stack
+            screenOptions={{
+              contentStyle: { backgroundColor: Colors.gray[700] },
+              headerShown: false,
+              statusBarTranslucent: true,
+              statusBarColor: "transparent",
+              statusBarStyle: "dark"
+            }}
+          />
+        </LanguageContextProvider>
       </DietContextProvider>
     </SafeAreaProvider>
   )

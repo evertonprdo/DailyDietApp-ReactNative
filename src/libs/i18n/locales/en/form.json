@@ -1,0 +1,21 @@
+{
+  "name": "Name",
+  "description": "Description",
+  "date": "Date",
+  "time": "Time",
+  "isWithinDiet": "Is it within the diet?",
+  "yes": "Yes",
+  "no": "No",
+  "modal": {
+    "headline": "Select date",
+    "subHeadline": "Select the day of this meal",
+    "button": "Confirm"
+  },
+  "alerts": {
+    "title": "Form",
+    "isWithinDiet": "Select whether the meal is within the diet",
+    "fillDateTime": "Fill in the date and time of the meal",
+    "nameLength": "The meal name must have at least 3 characters",
+    "descriptionLength": "The description must have at least 12 characters"
+  }
+}

@@ -1,5 +1,9 @@
-import { StorageMealsProps } from "@/libs/storage/storageMeals";
 import dayjs from "dayjs";
+
+import { LanguageMap } from "@/constants/language";
+
+import { LanguagesKeys } from "@/libs/i18n";
+import { StorageMealsProps } from "@/libs/storage/storageMeals";
 
 type MealProps = StorageMealsProps["data"][0]
 
@@ -13,13 +17,15 @@ export type MealSectionListProps = {
   }[]
 }[]
 
-export function getFormattedSectionList(meals: MealProps[]) {
+export function getFormattedSectionList(meals: MealProps[], formatKey: LanguagesKeys = 'en') {
   const sectionList = mealsToSectionList(meals);
+
+  const dateFormat = LanguageMap.find(lang => lang.key === formatKey)?.date.replace(/\//g, '.')
 
   return sectionList.map(section => {
     return {
       ...section,
-      date: dayjs(section.date).format("DD.MM.YYYY")
+      date: dayjs(section.date).format(dateFormat)
     }
   })
 }

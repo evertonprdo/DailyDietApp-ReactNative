@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useState } from "react";
 import { Alert, Modal, StyleSheet, View } from "react-native";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 
 import PencilSimpleLine from "@/assets/icons/PencilSimpleLine";
@@ -13,9 +14,9 @@ import { PageTemplate } from "@/components/PageTemplate";
 import { Form } from "@/components/Form";
 import { Loading } from "@/components/Loading";
 
+import { useLanguage } from "@/hooks/useLanguage";
 import { useMealsReducer } from "@/hooks/useMealsReducer";
-import { inputValidations } from "@/utils/validationInputs";
-import { useTranslation } from "react-i18next";
+import { validateInputs } from "@/utils/validationInputs";
 
 const initialState = {
   title: "",
@@ -27,6 +28,7 @@ const initialState = {
 
 export default function Meal() {
   const { t } = useTranslation()
+  const { language } = useLanguage()
 
   const localParams = useLocalSearchParams();
   const { meals, dispatch } = useMealsReducer();
@@ -38,11 +40,19 @@ export default function Meal() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  function handleOnConfirmEdit() {
-    const iptValidationResponse = inputValidations(meal)
+  const dateTime = t('meal.dateTimeValues', {
+    date: dayjs(meal.date).format(language.date),
+    time: dayjs(meal.time).format(language.time),
+    interpolation: {
+      escapeValue: false
+    }
+  })
 
-    if (iptValidationResponse !== true) {
-      return Alert.alert(t('Form.alerts.title'), iptValidationResponse)
+  function handleOnConfirmEdit() {
+    try {
+      validateInputs(meal)
+    } catch (error: any) {
+      Alert.alert(t('form.alerts.title'), error.message)
     }
 
     const time = meal.time.split("T")[1]
@@ -88,9 +98,9 @@ export default function Meal() {
 
     if (!storageMeal)
       return Alert.alert(
-        "Refeição",
-        `Parece que a refeição ${localParams.id ?? localParams} não foi encontrada ou não existe.`,
-        [{ text: "Voltar a página inicial", onPress: () => router.dismissAll() }]
+        t('meal.title'),
+        t('meal.alert.message', { params: localParams.id ?? localParams }),
+        [{ text: t('meal.alert.button'), onPress: () => router.dismissAll() }]
       )
 
     setMeal({
@@ -107,24 +117,24 @@ export default function Meal() {
     <Fragment>
       <PageTemplate
         variant={meal.isWithinDiet ? "green" : "red"}
-        headerTitle={<Fragment>Refeição</Fragment>}
+        headerTitle={<Fragment>{t('meal.title')}</Fragment>}
         onPressGoBack={() => router.back()}
       >
         <MealInfo
           title={meal.title}
           description={meal.description}
-          dateTime={dayjs(meal.date).format("DD/MM/YYYY [às] HH:mm")}
+          dateTime={dateTime}
           isWithinDiet={meal.isWithinDiet as boolean}
         />
 
         <View style={styles.buttonsContainer}>
           <Button
-            title="Editar refeição"
+            title={t('meal.btn.edit')}
             icon={PencilSimpleLine}
             onPress={handleOnPressEdit}
           />
           <Button
-            title="Excluir refeição"
+            title={t('meal.btn.delete')}
             variant="light"
             icon={Trash}
             onPress={() => setIsModalVisible(true)}
@@ -145,7 +155,7 @@ export default function Meal() {
       >
         <PageTemplate
           variant="gray"
-          headerTitle={<Fragment>Editar refeição</Fragment>}
+          headerTitle={<Fragment>{t('meal.edit.title')}</Fragment>}
           onPressGoBack={() => setIsEditing(false)}
         >
           <Form
@@ -154,7 +164,7 @@ export default function Meal() {
           />
 
           <Button
-            title="Salvar alterações"
+            title={t('meal.edit.button')}
             onPress={handleOnConfirmEdit}
           />
         </PageTemplate>

@@ -48,8 +48,8 @@ export function Select({ variant, isSelected, children, ...props }: Props) {
 
       <NunitoTitle style={styles.text}>
         {variant === "YES"
-          ? t('Form.yes')
-          : t('Form.no')
+          ? t('form.yes')
+          : t('form.no')
         }
       </NunitoTitle>
     </AnimatedPressable>

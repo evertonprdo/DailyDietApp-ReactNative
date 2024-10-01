@@ -1,0 +1,21 @@
+{
+  "name": "Nome",
+  "description": "Descrição",
+  "date": "Data",
+  "time": "Hora",
+  "isWithinDiet": "Esta dento da dieta?",
+  "yes": "Sim",
+  "no": "Não",
+  "modal": {
+    "headline": "Selecionar data",
+    "subHeadline": "Selecione o dia desta refeição",
+    "button": "Confirmar"
+  },
+  "alerts": {
+    "title": "Formulário",
+    "isWithinDiet": "Selecione se a refeição está dentro da dieta",
+    "fillDateTime": "Preencha a data e horas da refeição",
+    "nameLength": "O nome da refeição deve ter pelo menos 3 caracteres",
+    "descriptionLength": "A descrição deve ter pelo menos 12 caracteres"
+  }
+}

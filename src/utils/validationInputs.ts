@@ -1,18 +1,22 @@
-import i18n from "@/libs/i18n"
 import { FormInputProps } from "@/components/Form"
 
-export function inputValidations(meal: FormInputProps) {
+import { InvalidInputNameError } from "./errors/invalid-input-name-error"
+import { MissingIsWithinDietError } from "./errors/missing-is-within-diet-error"
+import { MissingInputDateTimeError } from "./errors/missing-input-date-time-error"
+import { InvalidInputDescriptionError } from "./errors/invalid-input-description-error"
+
+export function validateInputs(meal: FormInputProps) {
   if (meal.isWithinDiet === null) 
-    return i18n.t('Form.alerts.isWithinDiet')
+    throw new MissingIsWithinDietError()
 
   if (!(meal.time.trim() || meal.date.trim())) 
-    return i18n.t('Form.alerts.fillDateTime')
+    throw new MissingInputDateTimeError()
 
   if (meal.title.trim().length < 3) 
-    return i18n.t('Form.alerts.nameLength')
+    throw new InvalidInputNameError()
 
   if (meal.description.trim().length < 12) 
-    return i18n.t('Form.alerts.descriptionLength')
+    throw new InvalidInputDescriptionError()
 
   return true
 }

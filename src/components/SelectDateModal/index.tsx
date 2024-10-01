@@ -5,18 +5,23 @@ import { Calendar as CalendarRN, CalendarProps, LocaleConfig } from "react-nativ
 
 import X from "@/assets/icons/X";
 import Colors from "@/constants/colors";
+import FontFamily from "@/constants/fonts";
+import { ptBR } from "@/constants/localeCalendarConfig";
 
 import styles from "./styles";
-import FontFamily from "@/constants/fonts";
 import { PressableIcon } from "@/components/PressableIcon";
 import { NunitoText, NunitoTitle } from "@/components/Text";
 
-import { ptBR } from "@/utils/localeCalendarConfig";
-
-LocaleConfig.locales["pt-br"] = ptBR
-LocaleConfig.defaultLocale = "pt-br"
+import { useLanguage } from "@/hooks/useLanguage";
 
 export function Calendar({ ...props }: CalendarProps) {
+  const { language } = useLanguage()
+
+  if (language.key === 'pt') {
+    LocaleConfig.locales["pt-br"] = ptBR
+    LocaleConfig.defaultLocale = "pt-br"
+  }
+
   return (
     <CalendarRN
       hideExtraDays
@@ -88,7 +93,7 @@ export function SelectDateModal({ onClose, children, headline, subHeadline, ...p
                 </NunitoText>
               </View>
 
-              <PressableIcon icon={X} fill={Colors.gray[300]} onPress={onClose}/>
+              <PressableIcon icon={X} fill={Colors.gray[300]} onPress={onClose} />
             </View>
             {children}
 

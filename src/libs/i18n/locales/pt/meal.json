@@ -1,0 +1,27 @@
+{
+  "title": "Refeição",
+  "dateTime": "Data e Hora",
+  "dateTimeValues": "{{date}} às {{time}}",
+  "tag": {
+    "good": "dentro da dieta",
+    "bad": "fora da dieta"
+  },
+  "btn": {
+    "edit": "Editar refeição",
+    "delete": "Excluir refeição"
+  },
+  "modal": {
+    "message": "Deseja realmente excluir o registro de refeição",
+    "cancel": "Cancelar",
+    "confirm": "Sim, excluir"
+  },
+  "edit": {
+    "title": "Editar refeição",
+    "button": "Salvar alterações"
+  },
+  "alert": {
+    "title": "Refeição",
+    "message": "Parece que a refeição {{params}} não foi encontrada ou não existe.",
+    "button": "Voltar a página inicial"
+  }
+}
