@@ -1,9 +1,8 @@
-import { NativeSyntheticEvent, TextInput, TextInputFocusEventData, TextInputProps, View } from "react-native";
+import { NativeSyntheticEvent, Text, TextInput, TextInputFocusEventData, TextInputProps, View } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import Colors from "@/constants/colors";
 import styles from "./styles";
-import { NunitoTitle } from "@/components/Text";
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
 
@@ -35,9 +34,9 @@ export function Input({ label, onFocus, onBlur, ...props }: Props) {
   return (
     <View style={styles.container}>
 
-      <NunitoTitle style={styles.label}>
+      <Text style={styles.label}>
         {label}
-      </NunitoTitle>
+      </Text>
 
       <AnimatedTextInput
         style={[styles.input, animatedStyles]}

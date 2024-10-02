@@ -1,18 +1,18 @@
 import { Fragment, useState } from "react";
 import { Alert } from "react-native";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import { PageTemplate } from "@/components/PageTemplate";
 import { Form } from "@/components/Form";
 import { Button } from "@/components/Button";
 
-import { useMealsReducer } from "@/hooks/useMealsReducer";
+import { useDiet } from "@/hooks/useDiet";
 import { validateInputs } from "@/utils/validationInputs";
-import { useTranslation } from "react-i18next";
 
 export default function CreateMeal() {
   const { t } = useTranslation()
-  const { dispatch, lastId } = useMealsReducer();
+  const { dispatches } = useDiet();
 
   const [meal, setMeal] = useState({
     title: "",
@@ -34,20 +34,12 @@ export default function CreateMeal() {
 
     const dateTime = `${date}T${time}`
 
-    const nextId = lastId.state + 1
-
-    dispatch({
-      type: "added",
-      params: {
-        id: String(nextId),
-        title: meal.title,
-        description: meal.description,
-        date: dateTime,
-        isWithinDiet: meal.isWithinDiet as boolean
-      }
+    dispatches.added({
+      title: meal.title,
+      description: meal.description,
+      date: dateTime,
+      isWithinDiet: meal.isWithinDiet as boolean
     })
-
-    lastId.setState(nextId)
 
     router.navigate({
       pathname: "/meal/feedback",

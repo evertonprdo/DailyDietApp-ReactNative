@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { STORAGE_MEALS } from "./storage.config"
-import { MealProps } from "@/hooks/mealsReducer"
+import { MealProps } from "@/contexts/mealsReducer"
 
 export type StorageMealsProps = {
   data: {

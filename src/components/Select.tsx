@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Pressable, PressableProps, StyleSheet, View } from "react-native";
+import { Pressable, PressableProps, StyleSheet, Text, View } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 import Colors from "@/constants/colors";
-import { NunitoTitle } from "./Text";
-import { useTranslation } from "react-i18next";
+import FontFamily from "@/constants/fonts";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
@@ -46,12 +46,12 @@ export function Select({ variant, isSelected, children, ...props }: Props) {
     >
       <View style={[styles.tag, { backgroundColor: tintColor }]} />
 
-      <NunitoTitle style={styles.text}>
+      <Text style={styles.text}>
         {variant === "YES"
           ? t('form.yes')
           : t('form.no')
         }
-      </NunitoTitle>
+      </Text>
     </AnimatedPressable>
   )
 }
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 9999
   },
   text: {
+    fontFamily: FontFamily.regular,
     color: Colors.gray[100],
     fontSize: 14
   }

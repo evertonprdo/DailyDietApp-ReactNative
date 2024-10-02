@@ -1,4 +1,4 @@
-import { FlatList, Image, Modal, View } from "react-native";
+import { FlatList, Image, Modal, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { BlurView } from "expo-blur";
 
@@ -8,7 +8,6 @@ import X from "@/assets/icons/X";
 
 import styles from "./styles";
 import { Button } from "@/components/Button";
-import { NunitoText, NunitoTitle } from "@/components/Text";
 import { PressableIcon } from "@/components/PressableIcon";
 
 import { useLanguage } from "@/hooks/useLanguage";
@@ -41,9 +40,9 @@ export function Profile({ visible, onClose }: Props) {
             <View style={styles.header}>
               <View style={styles.emptyView} />
 
-              <NunitoTitle style={styles.text}>
+              <Text style={styles.title}>
                 {t('home.modal.title')}
-              </NunitoTitle>
+              </Text>
 
               <PressableIcon
                 icon={X}
@@ -58,9 +57,9 @@ export function Profile({ visible, onClose }: Props) {
             />
 
             <View style={styles.options}>
-              <NunitoText style={styles.text}>
+              <Text style={styles.text}>
                 {t('home.modal.languages')}
-              </NunitoText>
+              </Text>
 
               <FlatList
                 data={LanguageMap}

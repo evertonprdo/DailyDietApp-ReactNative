@@ -15,7 +15,7 @@ import { Form } from "@/components/Form";
 import { Loading } from "@/components/Loading";
 
 import { useLanguage } from "@/hooks/useLanguage";
-import { useMealsReducer } from "@/hooks/useMealsReducer";
+import { useDiet } from "@/hooks/useDiet";
 import { validateInputs } from "@/utils/validationInputs";
 
 const initialState = {
@@ -31,7 +31,7 @@ export default function Meal() {
   const { language } = useLanguage()
 
   const localParams = useLocalSearchParams();
-  const { meals, dispatch } = useMealsReducer();
+  const { meals, dispatches } = useDiet();
 
   const [meal, setMeal] = useState(initialState);
   const [editableMeal, setEditableMeal] = useState(initialState);
@@ -60,15 +60,12 @@ export default function Meal() {
 
     const dateTime = `${date}T${time}`
 
-    dispatch({
-      type: "changed",
-      params: {
-        id: localParams.id as string,
-        title: editableMeal.title,
-        description: editableMeal.description,
-        date: dateTime,
-        isWithinDiet: editableMeal.isWithinDiet as boolean,
-      }
+    dispatches.changed({
+      id: localParams.id as string,
+      title: editableMeal.title,
+      description: editableMeal.description,
+      date: dateTime,
+      isWithinDiet: editableMeal.isWithinDiet as boolean,
     })
 
     setMeal(editableMeal)
@@ -76,12 +73,7 @@ export default function Meal() {
   }
 
   function handleOnConfirmDelete() {
-    dispatch({
-      type: "deleted",
-      params: {
-        id: localParams.id as string
-      }
-    })
+    dispatches.deleted(localParams.id as string)
 
     router.dismissAll()
   }

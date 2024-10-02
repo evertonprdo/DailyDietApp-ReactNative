@@ -1,3 +1,4 @@
+import FontFamily from "@/constants/fonts";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   title: {
+    fontFamily: FontFamily.bold,
     fontSize: 14,
   }
 })

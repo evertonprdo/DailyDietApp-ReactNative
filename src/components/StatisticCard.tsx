@@ -1,7 +1,7 @@
-import { StyleSheet, View, ViewProps } from "react-native";
+import { StyleSheet, Text, View, ViewProps } from "react-native";
 
-import { NunitoText, NunitoTitle } from "@/components/Text";
 import Colors from "@/constants/colors";
+import FontFamily from "@/constants/fonts";
 
 type Props = ViewProps & {
   variant: "green" | "red" | "gray"
@@ -21,13 +21,13 @@ export function StatisticCard({ headline, subHeadline, variant, style, ...props 
       style={[styles.container, { backgroundColor }, style]}
       {...props}
     >
-      <NunitoTitle style={styles.headline}>
+      <Text style={styles.headline}>
         {headline}
-      </NunitoTitle>
+      </Text>
 
-      <NunitoText style={styles.subHeadline}>
+      <Text style={styles.subHeadline}>
         {subHeadline}
-      </NunitoText>
+      </Text>
     </View>
   )
 }
@@ -40,11 +40,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headline: {
+    fontFamily: FontFamily.bold,
     fontSize: 24,
     color: Colors.gray[100],
     textAlign: "center"
   },
   subHeadline: {
+    fontFamily: FontFamily.regular,
     color: Colors.gray[200],
     fontSize: 14,
     textAlign: "center"

@@ -1,4 +1,4 @@
-import { Modal, ModalProps, View } from "react-native";
+import { Modal, ModalProps, Text, View } from "react-native";
 import { BlurView } from "expo-blur";
 import Animated, { SlideInDown } from "react-native-reanimated";
 import { Calendar as CalendarRN, CalendarProps, LocaleConfig } from "react-native-calendars";
@@ -10,7 +10,6 @@ import { ptBR } from "@/constants/localeCalendarConfig";
 
 import styles from "./styles";
 import { PressableIcon } from "@/components/PressableIcon";
-import { NunitoText, NunitoTitle } from "@/components/Text";
 
 import { useLanguage } from "@/hooks/useLanguage";
 
@@ -74,27 +73,18 @@ export function SelectDateModal({ onClose, children, headline, subHeadline, ...p
           >
             <View style={styles.headerContainer}>
               <View style={styles.headlineContainer}>
-                <NunitoTitle
-                  style={{
-                    color: Colors.gray[200],
-                    fontSize: 18
-                  }}
-                >
+                <Text style={styles.headline}>
                   {headline}
-                </NunitoTitle>
+                </Text>
 
-                <NunitoText
-                  style={{
-                    color: Colors.gray[300],
-                    fontSize: 16
-                  }}
-                >
+                <Text style={styles.subHeadline}>
                   {subHeadline}
-                </NunitoText>
+                </Text>
               </View>
 
               <PressableIcon icon={X} fill={Colors.gray[300]} onPress={onClose} />
             </View>
+            
             {children}
 
           </Animated.View>

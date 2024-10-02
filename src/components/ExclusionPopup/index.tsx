@@ -1,9 +1,9 @@
-import { Modal, ModalProps, View } from "react-native";
+import { Modal, ModalProps, Text, View } from "react-native";
 import { BlurView } from "expo-blur";
 
 import styles from "./styles";
-import { NunitoTitle } from "@/components/Text";
 import { Button } from "@/components/Button";
+import { useTranslation } from "react-i18next";
 
 type Props = ModalProps & {
   onConfirm: () => void
@@ -11,6 +11,8 @@ type Props = ModalProps & {
 }
 
 export function ExclusionPopup({ onConfirm, onCancel, ...props }: Props) {
+  const { t } = useTranslation()
+
   return (
     <Modal
       animationType="fade"
@@ -26,19 +28,19 @@ export function ExclusionPopup({ onConfirm, onCancel, ...props }: Props) {
         <View style={styles.bgContainer}>
           <View style={styles.popup}>
 
-            <NunitoTitle style={styles.text}>
-              Deseja realmente excluir o{"\n"}registro da refeição?
-            </NunitoTitle>
+            <Text style={styles.text}>
+              {t('meal.modal.message')}
+            </Text>
 
             <View style={styles.options}>
               <Button
-                title="Cancelar"
+                title={t('meal.modal.cancel')}
                 variant="light"
                 onPress={onCancel}
                 style={styles.button}
               />
               <Button
-                title="Sim, excluir"
+                title={t('meal.modal.confirm')}
                 onPress={onConfirm}
                 style={styles.button}
               />

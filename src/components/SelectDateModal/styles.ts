@@ -1,4 +1,5 @@
 import Colors from "@/constants/colors";
+import FontFamily from "@/constants/fonts";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -28,6 +29,18 @@ const styles = StyleSheet.create({
   },
   headlineContainer: {
     gap: 8
+  },
+
+  headline: {
+    fontFamily: FontFamily.bold,
+    color: Colors.gray[200],
+    fontSize: 18
+  },
+
+  subHeadline: {
+    fontFamily: FontFamily.regular,
+    color: Colors.gray[300],
+    fontSize: 16
   }
 })
 

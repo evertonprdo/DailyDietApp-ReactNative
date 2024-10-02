@@ -9,7 +9,7 @@ import Colors from "@/constants/colors";
 import { Loading } from "@/components/Loading";
 
 import { getStorageMeals, StorageMealsProps } from "@/libs/storage/storageMeals";
-import { DietContextProvider } from "@/contexts/DietContextProvider";
+import { DietContextProvider } from "@/contexts/DietContext";
 import { LanguageContextProvider } from "@/contexts/LanguageContext";
 
 export default function RootLayout() {

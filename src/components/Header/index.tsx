@@ -1,11 +1,12 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import styles from "./styles";
-import { NunitoTitle } from "@/components/Text";
-import { PressableIcon } from "@/components/PressableIcon";
 import ArrowLeft from "@/assets/icons/ArrowLeft";
+
+import styles from "./styles";
 import Colors from "@/constants/colors";
+import { PressableIcon } from "@/components/PressableIcon";
+
 
 type Props = {
   children?: React.ReactNode
@@ -25,9 +26,9 @@ export function Header({ variant, children, onPressArrowLeft }: Props) {
 
       <PressableIcon fill={tintColor} icon={ArrowLeft} onPress={onPressArrowLeft} />
 
-      <NunitoTitle style={styles.text}>
+      <Text style={styles.text}>
         {children}
-      </NunitoTitle>
+      </Text>
 
       <View style={styles.emptyView} />
     </SafeAreaView>

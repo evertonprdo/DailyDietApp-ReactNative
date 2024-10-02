@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -7,7 +7,7 @@ import BadFeedback from "@/assets/bad-feedback.png"
 
 import Colors from "@/constants/colors";
 import { Button } from "@/components/Button";
-import { NunitoText, NunitoTitle } from "@/components/Text";
+import FontFamily from "@/constants/fonts";
 
 export default function Feedback() {
   const { t } = useTranslation()
@@ -31,15 +31,15 @@ export default function Feedback() {
     <View style={styles.container}>
       <View style={styles.messageContainer}>
 
-        <NunitoTitle style={[styles.headline, { color }]}>
+        <Text style={[styles.headline, { color }]}>
           {t(titleKey)}
-        </NunitoTitle>
+        </Text>
 
-        <NunitoText style={styles.subHeadline}>
+        <Text style={styles.subHeadline}>
           <Trans i18nKey={subTitleKey}>
-            <NunitoTitle/>
+            <Text style={styles.bold}/>
           </Trans>
-        </NunitoText>
+        </Text>
       </View>
 
       <Image
@@ -68,13 +68,18 @@ const styles = StyleSheet.create({
     marginBottom: 40
   },
   headline: {
+    fontFamily: FontFamily.bold,
     fontSize: 24,
     textAlign: "center"
   },
   subHeadline: {
+    fontFamily: FontFamily.regular,
     color: Colors.gray[100],
     fontSize: 16,
     textAlign: "center"
+  },
+  bold: {
+    fontFamily: FontFamily.bold,
   },
 
   image: {

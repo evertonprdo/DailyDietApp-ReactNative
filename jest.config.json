@@ -2,18 +2,19 @@
   "preset": "jest-expo",
   "setupFilesAfterEnv": [
     "@testing-library/react-native/extend-expect",
-    "./__tests__/mocks/libs/expo-localization.js"
+    "./src/__tests__/mocks/libs/expo-localization.js"
   ],
   "transformIgnorePatterns": [
     "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg)"
   ],
   "setupFiles": [
-    "./__tests__/mocks/libs/async-storage.js"
+    "./src/__tests__/mocks/libs/async-storage.js",
+    "./src/__tests__/mocks/libs/react-native-safe-area-context.js"
   ],
   "testPathIgnorePatterns": [
-    "./__tests__/mocks",
-    "./__tests__/utils",
-    "./__tests__/coverage"
+    "./src/__tests__/mocks",
+    "./src/__tests__/utils",
+    "./src/__tests__/coverage"
   ],
   "collectCoverageFrom": [
     "./src/**/*.{ts,tsx}",
@@ -21,7 +22,9 @@
   ],
   "coveragePathIgnorePatterns": [
     "./src/@types",
-    "./src/styles"
+    "./src/styles",
+    "./src/constants",
+    "./src/assets"
   ],
-  "coverageDirectory": "./__tests__/coverage"
+  "coverageDirectory": "./src/__tests__/coverage"
 }

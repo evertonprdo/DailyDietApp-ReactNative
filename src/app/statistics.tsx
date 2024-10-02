@@ -1,35 +1,35 @@
 import { Fragment } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import Colors from "@/constants/colors";
+import FontFamily from "@/constants/fonts";
 
 import { PageTemplate } from "@/components/PageTemplate";
 import { StatisticCard } from "@/components/StatisticCard";
-import { NunitoText, NunitoTitle } from "@/components/Text";
 
-import { useDietStatistics } from "@/hooks/useDietStatistics";
+import { useDiet } from "@/hooks/useDiet";
 
 export default function Statistics() {
   const { t } = useTranslation()
 
-  const Statistics = useDietStatistics();
+  const { statistics } = useDiet();
 
-  const headerVariant = Statistics === null
+  const headerVariant = statistics === null
     ? "gray"
-    : Statistics.percentWithinDiet >= 0.5
+    : statistics.percentWithinDiet >= 0.5
       ? "green"
       : "red"
 
-  const header = Statistics === null
+  const header = statistics === null
     ? t('statistics.title')
-    : (Statistics.percentWithinDiet * 100).toFixed(2).replace('.', ',') + "%"
+    : (statistics.percentWithinDiet * 100).toFixed(2).replace('.', ',') + "%"
 
-  const bestSequence = Statistics?.bestSequence ?? 0
-  const mealsAmount = Statistics?.mealsAmount ?? 0
-  const inMeals = Statistics?.inMeals ?? 0
-  const outMeals = Statistics?.outMeals ?? 0
+  const inMeals = statistics?.withinDiet ?? 0
+  const outMeals = statistics?.outsideDiet ?? 0
+  const mealsAmount = statistics?.mealsAmount ?? 0
+  const bestSequence = statistics?.bestStreak ?? 0
 
   return (
     <PageTemplate
@@ -37,21 +37,21 @@ export default function Statistics() {
       onPressGoBack={() => router.back()}
       headerTitle={(
         <Fragment>
-          <NunitoTitle style={styles.navHeadline}>
+          <Text style={styles.navHeadline}>
             {header}{"\n"}
-          </NunitoTitle>
+          </Text>
 
-          <NunitoText style={styles.navSubHeadline}>
+          <Text style={styles.navSubHeadline}>
             {t('statistics.subtitle')}
-          </NunitoText>
+          </Text>
         </Fragment>
       )}
     >
       <View style={styles.dataContainer}>
 
-        <NunitoTitle style={styles.title}>
+        <Text style={styles.title}>
           {t('statistics.sectionTitle')}
-        </NunitoTitle>
+        </Text>
 
         <StatisticCard
           variant="gray"
@@ -86,14 +86,17 @@ export default function Statistics() {
 
 const styles = StyleSheet.create({
   navHeadline: {
-    fontSize: 32
+    fontSize: 32,
+    fontFamily: FontFamily.bold
   },
   navSubHeadline: {
+    fontFamily: FontFamily.regular,
     fontSize: 14,
     color: Colors.gray[200]
   },
 
   title: {
+    fontFamily: FontFamily.bold,
     fontSize: 14,
     color: Colors.gray[100],
     textAlign: "center",

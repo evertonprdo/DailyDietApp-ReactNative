@@ -1,4 +1,5 @@
 import Colors from "@/constants/colors";
+import FontFamily from "@/constants/fonts";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
+    fontFamily: FontFamily.bold,
     color: Colors.gray[200],
     fontSize: 18,
     textAlign: "center"

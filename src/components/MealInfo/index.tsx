@@ -1,10 +1,9 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 
 import Colors from "@/constants/colors";
 
 import styles from "./styles";
-import { NunitoText, NunitoTitle } from "@/components/Text";
 
 type Props = {
   title: string
@@ -22,31 +21,31 @@ export function MealInfo({ title, description, dateTime, isWithinDiet }: Props) 
   return (
     <View style={styles.container}>
       <View style={styles.section}>
-        <NunitoTitle style={styles.title}>
+        <Text style={styles.title}>
           {title}
-        </NunitoTitle>
+        </Text>
 
-        <NunitoText style={styles.text}>
+        <Text style={styles.text}>
           {description}
-        </NunitoText>
+        </Text>
       </View>
 
       <View style={styles.section}>
-        <NunitoTitle style={styles.subTitle}>
+        <Text style={styles.subTitle}>
           {t('meal.dateTime')}
-        </NunitoTitle>
+        </Text>
 
-        <NunitoText style={styles.text}>
+        <Text style={styles.text}>
           {dateTime}
-        </NunitoText>
+        </Text>
       </View>
 
       <View style={styles.tagContainer}>
         <View style={[styles.tagIcon, { backgroundColor: tagColor }]} />
 
-        <NunitoText style={styles.text}>
+        <Text style={styles.text}>
           {tagText}
-        </NunitoText>
+        </Text>
       </View>
     </View>
   )

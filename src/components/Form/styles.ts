@@ -1,4 +1,5 @@
 import Colors from "@/constants/colors";
+import FontFamily from "@/constants/fonts";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
     gap: 8
   },
   selectLabel: {
+    fontFamily: FontFamily.bold,
     color: Colors.gray[200],
     fontSize: 14
   },

@@ -1,10 +1,9 @@
 import { router } from "expo-router";
-import { SectionList } from "react-native";
+import { SectionList, Text } from "react-native";
 import dayjs from "dayjs";
 
 import styles from "./styles";
 import { ItemList } from "@/components/ItemList";
-import { NunitoTitle } from "@/components/Text";
 
 import { MealSectionListProps } from "@/utils/meals";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -31,9 +30,9 @@ export function MealSectionList({ sections, children }: Props) {
         />
       )}
       renderSectionHeader={({ section }) => (
-        <NunitoTitle style={styles.sectionTitle}>
+        <Text style={styles.sectionTitle}>
           {section.date}
-        </NunitoTitle>
+        </Text>
       )}
       contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}

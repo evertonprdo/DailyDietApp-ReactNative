@@ -1,9 +1,8 @@
 import Colors from "@/constants/colors";
-import { GestureResponderEvent, Pressable, PressableProps } from "react-native";
+import { GestureResponderEvent, Pressable, PressableProps, Text } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
 import { SvgProps } from "react-native-svg";
 
-import { NunitoTitle } from "@/components/Text";
 import styles from "./styles";
 import { TapAnimationConfig } from "@/constants/animation";
 
@@ -57,9 +56,9 @@ export function Button({ variant = "dark", icon: Icon, title, onPressIn, onPress
     >
       {Icon && <Icon fill={tintColor} height={18} width={18} />}
       
-      <NunitoTitle style={[styles.title, { color: tintColor }]}>
+      <Text style={[styles.title, { color: tintColor }]}>
         {title}
-      </NunitoTitle>
+      </Text>
     </AnimatedPressable>
   )
 }

@@ -1,47 +1,47 @@
-import { MealProps } from "@/hooks/mealsReducer"
+import { MealProps } from "@/contexts/mealsReducer"
 
 type LocalStatistics = {
-  inMeals: number
-  outMeals: number
+  withinDiet: number
+  outsideDiet: number
 
-  bestSequence: number
-  currentSequence: number
+  bestStreak: number
+  streak: number
 }
 
 export function geDietStatistics(meals: MealProps[]) {
   let local: LocalStatistics = {
-    inMeals: 0,
-    outMeals: 0,
-    bestSequence: 0,
-    currentSequence: 0
+    withinDiet: 0,
+    outsideDiet: 0,
+    bestStreak: 0,
+    streak: 0
   }
 
   meals.forEach(meal => {
     const { isWithinDiet } = meal
 
     if (isWithinDiet) {
-      local.currentSequence++
-      local.inMeals++
+      local.streak++
+      local.withinDiet++
 
-      if (local.currentSequence > local.bestSequence) {
-        local.bestSequence = local.currentSequence
+      if (local.streak > local.bestStreak) {
+        local.bestStreak = local.streak
       }
       return
     }
 
-    local.currentSequence = 0
-    local.outMeals++
+    local.streak = 0
+    local.outsideDiet++
     return
   })
 
   const mealsAmount = meals.length
-  const percent = local.inMeals / mealsAmount;
+  const percent = local.withinDiet / mealsAmount;
 
   return {
     percentWithinDiet: percent,
-    bestSequence: local.bestSequence,
+    bestStreak: local.bestStreak,
     mealsAmount,
-    inMeals: local.inMeals,
-    outMeals: local.outMeals
+    withinDiet: local.withinDiet,
+    outsideDiet: local.outsideDiet
   }
 }

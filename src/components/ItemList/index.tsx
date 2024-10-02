@@ -1,8 +1,8 @@
-import { GestureResponderEvent, Pressable, PressableProps, View } from "react-native";
-import { NunitoText, NunitoTitle } from "@/components/Text";
+import { GestureResponderEvent, Pressable, PressableProps, Text, View } from "react-native";
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
+
 import styles from "./styles";
 import Colors from "@/constants/colors";
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
@@ -44,15 +44,15 @@ export function ItemList({ title, time, isWithinDiet, onPress, ...props }: Props
       {...props}
     >
 
-      <NunitoTitle style={styles.time}>
+      <Text style={styles.time}>
         {time}
-      </NunitoTitle>
+      </Text>
 
       <View style={styles.divider} />
 
-      <NunitoText style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+      <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
         {title}
-      </NunitoText>
+      </Text>
 
       <View style={[styles.tag, { backgroundColor: tagColor }]} />
     </AnimatedPressable>

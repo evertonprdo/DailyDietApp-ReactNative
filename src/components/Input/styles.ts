@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   label: {
+    fontFamily: FontFamily.bold,
     color: Colors.gray[200],
     fontSize: 14
   }

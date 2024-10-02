@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Keyboard, NativeSyntheticEvent, NativeTouchEvent, View } from "react-native";
+import { Keyboard, NativeSyntheticEvent, NativeTouchEvent, Text, View } from "react-native";
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
@@ -12,7 +12,6 @@ import styles from "./styles";
 import { Input } from "@/components/Input";
 import { Select } from "@/components/Select";
 import { Button } from "@/components/Button";
-import { NunitoTitle } from "@/components/Text";
 import { Calendar, SelectDateModal } from "@/components/SelectDateModal";
 
 import { useLanguage } from "@/hooks/useLanguage";
@@ -129,9 +128,9 @@ export function Form({ state, setState }: Props) {
       </View>
 
       <View style={styles.selectContainer}>
-        <NunitoTitle style={styles.selectLabel}>
+        <Text style={styles.selectLabel}>
           {t('form.isWithinDiet')}
-        </NunitoTitle>
+        </Text>
 
         <View style={styles.selectOptions}>
           <Select

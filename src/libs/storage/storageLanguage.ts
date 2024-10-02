@@ -1,16 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Localization from "expo-localization"
 
 import { LanguagesKeys } from "../i18n";
 import { STORAGE_LANGUAGE } from "./storage.config";
+import { getLocalizationLanguageKey } from "../localization";
 
 export async function getStorageLanguage() {
   const storageLanguage = await AsyncStorage.getItem(STORAGE_LANGUAGE)
 
   if (!storageLanguage) {
-    const localeLanguage = Localization.getLocales()[0].languageCode ?? 'en'
-    await saveStorageLanguage(localeLanguage as LanguagesKeys)
+    const localeLanguage = getLocalizationLanguageKey()
 
+    await saveStorageLanguage(localeLanguage)
     return localeLanguage
   }
   return storageLanguage

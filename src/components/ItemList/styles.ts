@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native"
 import Colors from "@/constants/colors"
+import FontFamily from "@/constants/fonts"
 
 const styles = StyleSheet.create({
   container: {
@@ -19,11 +20,13 @@ const styles = StyleSheet.create({
   },
 
   title: { 
+    fontFamily: FontFamily.regular,
     flex: 1,
     color: Colors.gray[200],
     fontSize: 16
   },
   time: {
+    fontFamily: FontFamily.bold,
     color: Colors.gray[100],
     fontSize: 12
   },
