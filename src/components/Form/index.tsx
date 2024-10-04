@@ -78,6 +78,7 @@ export function Form({ state, setState }: Props) {
   return (
     <View style={styles.container}>
       <Input
+        testID="name-input"
         label={t('form.name')}
         value={state.title}
         onChangeText={(text) => handleOnChangeText("title", text)}
@@ -85,6 +86,7 @@ export function Form({ state, setState }: Props) {
       />
 
       <Input
+        testID="description-input"
         label={t('form.description')}
         value={state.description}
         onChangeText={(text) => handleOnChangeText("description", text)}
@@ -97,6 +99,7 @@ export function Form({ state, setState }: Props) {
       <View style={styles.dateTimeContainer}>
         <View style={styles.dateInputContainer}>
           <Input
+            testID="date-input"
             label={t('form.date')}
             value={state.date ? dayjs(state.date).format(language.date) : ""}
             onPressIn={handleOnPressInDate}
@@ -112,6 +115,7 @@ export function Form({ state, setState }: Props) {
 
         <View style={styles.dateInputContainer}>
           <Input
+            testID="time-input"
             label={t('form.time')}
             value={state.time ? dayjs(state.time).format(language.time) : ""}
             onChangeText={(text) => handleOnChangeText("time", text)}
@@ -134,11 +138,13 @@ export function Form({ state, setState }: Props) {
 
         <View style={styles.selectOptions}>
           <Select
+            testID="yes-input"
             variant="YES"
             isSelected={!!state.isWithinDiet}
             onPress={() => handleOnChangeValue(true)}
           />
           <Select
+            testID="no-input"
             variant="NO"
             isSelected={!(state.isWithinDiet || state.isWithinDiet === null)}
             onPress={() => handleOnChangeValue(false)}
@@ -159,7 +165,11 @@ export function Form({ state, setState }: Props) {
           markedDates={{ [localDate]: { selected: true } }}
         />
 
-        <Button title={t('form.modal.button')} onPress={handleSelectDateConfirm} />
+        <Button
+          testID="modal-button"
+          title={t('form.modal.button')}
+          onPress={handleSelectDateConfirm}
+        />
       </SelectDateModal>
     </View>
   )

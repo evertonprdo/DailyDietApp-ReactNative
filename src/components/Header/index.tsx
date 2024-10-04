@@ -3,8 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import ArrowLeft from "@/assets/icons/ArrowLeft";
 
-import styles from "./styles";
 import Colors from "@/constants/colors";
+import styles from "./styles";
 import { PressableIcon } from "@/components/PressableIcon";
 
 
